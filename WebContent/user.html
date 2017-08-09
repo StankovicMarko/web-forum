@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>WebForum</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="js/user.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="screen.css" />
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+  <!--[if lt ie 7]><link rel="stylesheet" type="text/css" media="screen" href="ie-win.css" /><![endif]-->
+</head>
+
+<body id="">
+  <div class="">
+    <div class="main_div">
+      <div id="header">
+        <div class="pull-left big_search">
+          <button type="submit" class="btn_default_mine" id="big_search">
+            <span class="glyphicon glyphicon-search"></span> Search Forum</button>
+          <!-- <a href="./index.html" ><h1>LOGO</h1></a> -->
+        </div>
+
+        <div class="pull-right marg" id="logged_out" style="width:100px;">
+          <button class="btn_default_mine" id="btn_login">Log In</button>
+          <button class="btn_default_mine" id="btn_register">Register</button>
+        </div>
+
+        <div id="logged_in">
+          <h2 id="logged_user" class="pull-left"></h2>
+          <!-- <h4 id="logged_user_role" class="pull-left"></h4> -->
+          <div class="pull-right marg" style="width:100px;">
+
+            <button class="btn_default_mine" id="btn_logout">Logout</button>
+            <button class="btn_default_mine" id="btn_pannel">Pannel</button>
+
+          </div>
+        </div>
+
+      </div>
+      <div id="navigation">
+        <ul>
+          <!--  verovatno ce id biti neki genercki tipa navlink(id) pa kad klices salje redirect sa data
+          i onda to izvuce na toj stranici i puca get na servlet dobije json i stampa -->
+          <li id="home"><a href="./index.html">Home</a></li>
+          <li id="parent_forum"></li>
+        </ul>
+
+        <div id="notification_window" class="modal">
+          <div class="modal-content">
+            <p id="message"></p>
+          </div>
+
+        </div>
+      </div>
+      <div id="content-wrapper">
+        <div id="content">
+
+          <div class="show">
+
+
+            <div class="panel-group" id="accordion">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+        User Info</a>
+      </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                  <div class="panel-body">
+
+
+                    <div class="well well-sm">
+
+								<fieldset>
+									<legend>Details</legend>
+										<form>
+                      <div class="form-group form-group-sm">
+                        <label>Picture:</label>
+                        <img id="user_picture" src="" alt="p" style="height: 60px; width: 60px;">
+
+                      </div>
+                      <div class="form-group form-group-sm">
+											    <label >Username:</label>
+											    <input id="username" class="form-control" value="" readonly="true">
+
+											</div>
+											<div class="form-group form-group-sm">
+											    <label for="email">Email</label>
+											    <input type="email" class="form-control" id="mail" value="" readonly="true">
+											</div>
+                      <div class="form-group form-group-sm">
+											    <label for="email">Date Registered</label>
+											    <input id="dateReg" class="form-control" value="" readonly="true">
+											</div>
+                      <div class="form-group form-group-sm">
+											    <label>Role</label>
+											    <input id="role" class="form-control" value="" readonly="true">
+											</div>
+                      <div class="form-group form-group-sm">
+											    <label>Banned</label>
+											    <input id="status" class="form-control" value="" readonly="true">
+											</div>
+										</form>
+								</fieldset>
+							</div>
+
+
+              <div class="user_details well well-sm">
+
+          <fieldset>
+            <legend>Change Details</legend>
+            <div class="form-group form-group-sm">
+                      <label for="fname">First Name:</label>
+                      <input type="text" class="form-control" id="name" value="" readonly="true">
+                  </div>
+                  <div class="form-group form-group-sm">
+                      <label for="lname">Last Name:</label>
+                      <input type="text" class="form-control" id="surName" value="" readonly="true">
+                  </div>
+              <form>
+                <div class="form-group form-group-sm">
+											    <label for="fname">New First Name:</label>
+                          <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+											    <input type="text" class="form-control" id="new_name" value="">
+											</div>
+                      <div class="form-group form-group-sm">
+											    <label for="lname">New Last Name:</label>
+                          <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+											    <input type="text" class="form-control" id="new_surName" value="">
+											</div>
+
+            <button type="submit" class="btn btn-default" id="change_details">Save</button>
+            </form>
+
+        </fieldset>
+
+      </div>
+
+
+              <div class="user_password well well-sm">
+
+								<fieldset>
+									<legend>Change Password</legend>
+										<form>
+											<div class="form-group form-group-sm">
+											    <label for="pwd">Old Password:</label>
+												<span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+											    <input type="password" class="form-control" id="old_pass">
+											 </div>
+
+											<div class="form-group form-group-sm">
+											    <label for="pwd">New Password:</label>
+												<span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+											    <input type="password" class="form-control" id="new_pass">
+											</div>
+
+											<button type="submit" class="btn btn-default" id="change_pass">Save</button>
+
+										</form>
+
+								</fieldset>
+
+							</div>
+
+
+              <div class="user_avatar well well-sm">
+
+								<fieldset>
+									<legend>Change Avatar</legend>
+                  <form action="UploadServlet" method="post"
+                      enctype="multipart/form-data">
+											<input type="file" name="file" size="50" class="btn btn-default" style="float:left"/>
+                      <!-- <input type="hidden" id="usn" name="usn"/> -->
+											<input type="submit" value="Upload File" class="btn btn-default" style="float:right"/>
+
+										</form>
+
+								</fieldset>
+
+							</div>
+
+                    </div>
+                </div>
+              </div>
+
+              <div class="topics panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+        User Topics</a>
+      </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                  <div class="panel-body">
+
+                    <div class="table-responsive">
+              <table id="user_topics">
+                <thead>
+                  <tr>
+                    <th>Topics</th>
+                    <th>owner</th>
+                    <th>date</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+              </tbody>
+              </table>
+
+            </div>
+
+
+                    </div>
+                </div>
+              </div>
+
+              <div class="replies panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+        User Replies</a>
+      </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                  <div class="panel-body">
+
+                    <div class="table-responsive">
+          <table id="user_replies">
+            <thead>
+              <tr><th colspan="2">replies
+               </th>
+            </tr></thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+
+
+                    </div>
+                </div>
+              </div>
+
+
+
+
+
+              <!--  varovatno ce ovo biti admin options-->
+              <div class="all_users panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+        Users</a><span id="add_new_user" class="glyphicon glyphicon-plus pull-right" title="Add User"></span>
+      </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse">
+                  <div class="panel-body">
+
+                    <div class="table-responsive">
+                      <table id="all_users_details"><thead>
+                        <tr>
+                        <th> picture </th>
+                        <th> username </th>
+                        <th> ime </th>
+                        <th> prezime </th>
+                        <th> mail </th>
+                        <th> date reg </th>
+                        <th> role </th>
+                        <th> status </th>
+                        <th>admin options</th>
+                      </tr>
+                      </thead>
+                        <tbody>
+                          <tr>
+                          <td> <img src="" alt="pi" style="height:60px; width:60px;"> </td>
+                          <td> admin </td>
+                          <td>   </td>
+                          <td>   </td>
+                          <td> admin@forum.com </td>
+                          <td> 25.5.2015 </td>
+                          <td> admin </td>
+                          <td> false </td>
+                          <td>
+                            <span class="glyphicon glyphicon-ban-circle" title="Ban User"></span>
+                            <span class="glyphicon glyphicon-edit" title="Edit User"></span>
+                              <span class="glyphicon glyphicon-remove" title="Remove User"></span>
+                           </td>
+                        </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+
+
+                    </div>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+          <!--  REGISTER WINDOW-->
+          <div class="modal_windows register_window modal">
+            <p>Please fill info under to register!</p>
+            <form>
+              <div class="form-group form-group-sm">
+                <label for="reg_usn">Username:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="text" class="form-control" id="reg_usn">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="reg_psw">Password:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="password" class="form-control" id="reg_psw">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="reg_email">Email address:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="email" class="form-control" id="reg_email">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="reg_fname">First Name:</label>
+                <input type="text" class="form-control" id="reg_fname">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="reg_lname">Last Name:</label>
+                <input type="text" class="form-control" id="reg_lname">
+              </div>
+
+
+              <button type="submit" class="btn_default_mine" id="register_submit">Register</button>
+              <input type="button" class="btn_default_mine" id="register_close" value="Close">
+            </form>
+          </div>
+
+
+          <!--  LOGIN WINDOW-->
+          <div class="modal_windows modal login_window">
+
+            <p>Please fill info under to login!</p>
+            <form>
+              <div class="form-group form-group-sm">
+                <label for="username">Username:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="text" class="form-control" id="login_username">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="password">Password:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="password" class="form-control" id="login_password">
+              </div>
+
+
+              <button type="submit" class="btn_default_mine" id="login_submit">Login</button>
+              <input type="button" class="btn_default_mine" id="login_close" value="Close">
+
+
+            </form>
+          </div>
+
+          <!--  BIG SEARCH - whole site show only what user can see -->
+          <div class="search_forum_window modal_windows modal">
+            <p>Advanced Search</p>
+            <form method="post" action="Search">
+              <div class="form-group form-group-sm">
+                <label for="keyword">Keyword:</label>
+                <input type="text" class="form-control" name="keyword" id="keyword">
+              </div>
+
+              <div class="checkbox">
+
+                <label><input type="checkbox" id="forumCB" name="forum">Forum</label> &nbsp;
+                <label><input type="checkbox" id="titleCB" name="title">Topic</label> &nbsp;
+                <label><input type="checkbox" id="contentCB" name="content">Replies</label> &nbsp;
+                <label><input type="checkbox" id="ownerCB" name="user">User</label> &nbsp;
+                <label><input type="checkbox" id="dateCB" name="date">Date</label> <br><br>
+
+                <div style="float: left;">
+                  <div class="input-group date d1" style="width: 150px;">
+                    <input type="text" class="form-control">
+                    <span class="input-group-addon">
+      								      		<i class="glyphicon glyphicon-th"></i>
+      								      	</span>
+                  </div>
+
+                </div>
+
+
+                <div style="float: left; padding-left: 10px;">
+
+                  <div class="input-group date d2" style="width: 150px;">
+                    <input type="text" class="form-control">
+                    <span class="input-group-addon">
+      								      		<i class="glyphicon glyphicon-th"></i>
+      								      	</span>
+                  </div>
+
+                </div>
+
+                <input type="hidden" name="date1" id="date1">
+                <input type="hidden" name="date2" id="date2">
+
+              </div>
+
+
+              <br>
+              <br>
+
+              <button type="submit" class="btn_default_mine" id="search_forum_submit" onclick="getDateValues()">Search</button>
+              <input type="button" class="btn_default_mine" id="search_forum_close" value="Close">
+            </form>
+          </div>
+
+
+          <!--  edit topic window-->
+          <div class="edit_topic_window modal modal_windows">
+            <form>
+              <div class="form-group form-group-sm">
+                <label>Title:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="text" class="form-control" id="edit_topic_name">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label>Description:</label>
+                <input type="text" class="form-control" id="edit_topic_description">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label>Content:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <textarea class="topic_content" id="edit_topic_content"></textarea>
+              </div>
+              <input type="button" class="btn_default_mine" id="edit_topic_submit" value="Edit Topic">
+              <input type="button" class="btn_default_mine" id="edit_topic_close" value="Close">
+            </form>
+          </div>
+
+
+
+          <!--  add user -->
+
+          <div class="modal_windows add_user_window modal">
+            <p>Please fill info under to add user!</p>
+            <form>
+              <div class="form-group form-group-sm">
+                <label for="reg_usn">Username:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="text" class="form-control" id="add_user_username">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="reg_psw">Password:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="password" class="form-control" id="add_user_password">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="reg_email">Email</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="email" class="form-control" id="add_user_mail">
+              </div>
+
+              <div class="form-group form-group-sm ">
+                <label>Select User Role:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <select class="form-control" id="add_user_role">
+                            <option value="registered">Registered</option>
+                            <option value="moderator">Moderator</option>
+                            <option value="admin">Admin</option>
+                        </select>
+              </div>
+
+              <button type="submit" class="btn_default_mine" id="add_user_submit">Add User</button>
+              <input type="button" class="btn_default_mine" id="add_user_close" value="Close">
+            </form>
+          </div>
+
+
+<!--  edit user-->
+          <div class="modal_windows edit_user_window modal">
+            <p>Please fill info under to edit user!</p>
+            <form>
+              <div class="form-group form-group-sm">
+                <label for="">Username:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="text" class="form-control" id="edit_user_username" readonly="true">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="">Password(leave empty if you don't want change):</label>
+                <!-- <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span> -->
+                <input type="password" class="form-control" id="edit_user_password">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="">Email</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="email" class="form-control" id="edit_user_mail">
+              </div>
+
+              <div class="form-group form-group-sm ">
+                <label>Select User Role:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <select class="form-control" id="edit_user_role">
+                            <option value="registered">Registered</option>
+                            <option value="moderator">Moderator</option>
+                            <option value="admin">Admin</option>
+                        </select>
+              </div>
+
+              <button type="submit" class="btn_default_mine" id="edit_user_submit">Edit User</button>
+              <input type="button" class="btn_default_mine" id="edit_user_close" value="Close">
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="footer">
+        <p>Copyright &copy; 2016 &ndash; 2017 WebForum. All rights reserved. </p>
+        <p> Design by <a href="https://github.com/StankovicMarko" title="SimplyGold">Marko Stankovic</a>.
+          <p> <a href="terms_services.html">Terms of Service</a> | <a href="about.html">About</a> </p>
+      </div>
+    </div>
+    <!-- </div> -->
+</body>
+
+</html>

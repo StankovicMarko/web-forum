@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>WebForum</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="js/index.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="screen.css" />
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+  <!--[if lt ie 7]><link rel="stylesheet" type="text/css" media="screen" href="ie-win.css" /><![endif]-->
+</head>
+
+<body id="">
+  <div class="">
+    <div class="main_div">
+      <div id="header">
+        <div class="pull-left big_search">
+            <button
+            type="submit"
+            class="btn_default_mine"
+            id="big_search">
+            <span class="glyphicon glyphicon-search"></span> Search Forum</button>
+        <!-- <a href="./index.html" ><h1>LOGO</h1></a> -->
+</div>
+
+        <div class="pull-right marg" id="logged_out" style="width:100px;">
+          <button class="btn_default_mine" id="btn_login">Log In</button>
+          <button class="btn_default_mine" id="btn_register">Register</button>
+        </div>
+
+        <div id="logged_in">
+          <h2 id="logged_user" class="pull-left"></h2>
+          <!-- <h4 id="logged_user_role" class="pull-left"></h4> -->
+          <div class="pull-right marg" style="width:100px;">
+
+            <button class="btn_default_mine" id="btn_logout">Logout</button>
+            <button class="btn_default_mine" id="btn_pannel">Pannel</button>
+
+          </div>
+        </div>
+
+      </div>
+      <div id="navigation">
+        <ul>
+          <!--  verovatno ce id biti neki genercki tipa navlink(id) pa kad klices salje redirect sa data
+          i onda to izvuce na toj stranici i puca get na servlet dobije json i stampa -->
+          <li id="home"><a href="./index.html">Home</a></li>
+        </ul>
+
+        <div id="notification_window" class="modal">
+          <div class="modal-content">
+            <p id="message"></p>
+          </div>
+
+        </div>
+      </div>
+      <div id="content-wrapper">
+        <div id="content">
+
+          <!-- FORUMI -->
+          <div class="show">
+            <div class="table-responsive">
+              <table id="page_forums">
+                <thead>
+                  <tr>
+                    <th>
+                      main forums
+                      <span id="add_forum" class="glyphicon glyphicon-plus admin_options" title="Add Forum">
+        </span>
+                    </th>
+                    <th>owner</th>
+                    <th>date</th>
+                    <th>status</th>
+                    <th class="admin_options">admin options</th>
+                  </tr>
+                </thead>
+                <tbody>
+              </tbody>
+              </table>
+            </div>
+          </div>
+
+          <ul id="pagi" class="pagination">
+            <li>  <select class="" id="forum_results">
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="20">20</option>
+                      </select></li>
+            <li>  <input type="button" id="forum_back" value="<<" ></li>
+            <li>  <label style="background:white" id="forum_page">1</label></li>
+            <li><input type="button" id="forum_next" value=">>"></li>
+          </ul>
+
+
+          <!--  REGISTER WINDOW-->
+          <div class="modal_windows register_window modal">
+            <p>Please fill info under to register!</p>
+            <form>
+              <div class="form-group form-group-sm">
+                <label for="reg_usn">Username:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="text" class="form-control" id="reg_usn">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="reg_psw">Password:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="password" class="form-control" id="reg_psw">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="reg_email">Email address:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="email" class="form-control" id="reg_email">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="reg_fname">First Name:</label>
+                <input type="text" class="form-control" id="reg_fname">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="reg_lname">Last Name:</label>
+                <input type="text" class="form-control" id="reg_lname">
+              </div>
+
+
+              <button type="submit" class="btn_default_mine" id="register_submit">Register</button>
+              <input type="button" class="btn_default_mine" id="register_close" value="Close">
+            </form>
+          </div>
+
+
+          <!--  LOGIN WINDOW-->
+          <div class="modal_windows modal login_window">
+
+            <p>Please fill info under to login!</p>
+            <form>
+              <div class="form-group form-group-sm">
+                <label for="username">Username:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="text" class="form-control" id="login_username">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="password">Password:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="password" class="form-control" id="login_password">
+              </div>
+
+
+              <button type="submit" class="btn_default_mine" id="login_submit">Login</button>
+              <input type="button" class="btn_default_mine" id="login_close" value="Close">
+
+
+            </form>
+          </div>
+
+          <!-- ADD FORUM -->
+          <div class="add_forum_window modal_windows modal">
+            <p>Fill data bellow to add new forum!</p>
+            <form>
+              <div class="form-group form-group-sm">
+                <label for="name">Name:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="text" class="form-control" id="add_forum_name">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label style="display: block;">Description:</label>
+                <textarea id="add_forum_description" style="width:100%;"></textarea>
+              </div>
+
+              <div class="form-group form-group-sm ">
+                <label>Select forum type:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <select class="form-control" id="add_forum_type">
+                            <option value="Public">Public</option>
+                            <option value="Open">Open</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+              </div>
+
+              <input type="hidden" id="parentId" value="">
+              <!-- <button type="submit" class="btn_default_mine" id="add_forum_submit">Add</button> -->
+              <input type="button" class="btn_default_mine" id="add_forum_submit" value="Add">
+              <input type="button" class="btn_default_mine" id="add_forum_close" value="Close">
+            </form>
+          </div>
+        </div>
+
+        <!-- EDIT FORUM -->
+        <div class="edit_forum_window modal_windows modal">
+          <p>Edit data bellow to edit this forum!</p>
+          <form>
+            <div class="form-group form-group-sm">
+              <label for="name">Name:</label>
+              <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+              <input type="text" class="form-control" id="edit_forum_name">
+            </div>
+
+            <div class="form-group form-group-sm">
+              <label style="display: block;">Description:</label>
+              <textarea id="edit_forum_description" style="width:100%;"></textarea>
+            </div>
+
+            <div class="form-group form-group-sm ">
+              <label>Select forum type:</label>
+              <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+              <select class="form-control" id="edit_forum_type">
+                          <option value="Public">Public</option>
+                          <option value="Open">Open</option>
+                          <option value="Closed">Closed</option>
+                      </select>
+            </div>
+
+            <input type="hidden" id="parentId" value="">
+            <!-- <button type="submit" class="btn_default_mine" id="add_forum_submit">Add</button> -->
+            <input type="button" class="btn_default_mine" id="edit_forum_submit" value="Edit">
+            <input type="button" class="btn_default_mine" id="edit_forum_close" value="Close">
+          </form>
+        </div>
+      </div>
+
+
+<!--  BIG SEARCH - whole site show only what user can see -->
+      <div class="search_forum_window modal_windows modal">
+      						<p>Advanced Search</p>
+      						 <form method="post" action="Search">
+      							<div class="form-group form-group-sm">
+      								<label for="keyword">Keyword:</label>
+      								<input type="text" class="form-control" name="keyword" id="keyword">
+      							</div>
+
+      							<div class="checkbox">
+      								<!-- <script type="text/javascript">
+      									function dateClicked(){
+
+      										$(".checkbox .input-group.date.d1").datepicker({
+      										});
+
+
+      										$(".checkbox .input-group.date.d2").datepicker({
+      										});
+
+      									}
+
+      									function getDateValues(){
+      										var dt1 = $(".checkbox .input-group.date.d1").datepicker("getDate");
+      										var dt2 = $(".checkbox .input-group.date.d2").datepicker("getDate");
+
+      										var dt1_year = dt1.getFullYear();
+      										var dt1_month = dt1.getMonth() + 1;
+      										var dt1_day = dt1.getDate();
+
+      										var dt2_year = dt2.getFullYear();
+      										var dt2_month = dt2.getMonth() + 1;
+      										var dt2_day = dt2.getDate();
+
+      										var final1 = dt1_year + "-" + dt1_month + "-" + dt1_day;
+      										var final2 = dt2_year + "-" + dt2_month + "-" + dt2_day;
+
+      										$("#date1").val(final1);
+      										$("#date2").val(final2);
+      									}
+      								</script> -->
+
+      								<label><input type="checkbox" id="forumCB" name="forum">Forum</label> &nbsp;
+      								<label><input type="checkbox" id="titleCB" name="title">Topic</label> &nbsp;
+      								<label><input type="checkbox" id="contentCB" name="content">Replies</label> &nbsp;
+      								<label><input type="checkbox" id="ownerCB" name="user">User</label> &nbsp;
+      								<label><input type="checkbox" id="dateCB" name="date">Date</label> <br><br>
+
+      								<div style="float: left;">
+      									<div class="input-group date d1" style="width: 150px;">
+      								      <input type="text" class="form-control">
+      								      	<span class="input-group-addon">
+      								      		<i class="glyphicon glyphicon-th"></i>
+      								      	</span>
+      								    </div>
+
+      								</div>
+
+
+      								<div style="float: left; padding-left: 10px;">
+
+      								    <div class="input-group date d2" style="width: 150px;">
+      								      <input type="text" class="form-control">
+      								      	<span class="input-group-addon">
+      								      		<i class="glyphicon glyphicon-th"></i>
+      								      	</span>
+      								    </div>
+
+      								</div>
+
+      								<input type="hidden" name="date1" id="date1">
+      								<input type="hidden" name="date2" id="date2">
+
+      							    <!-- <script type="text/javascript">
+      							    	dateClicked();
+      							    </script> -->
+
+      							</div>
+
+
+      							<br>
+      							<br>
+
+        							<button type="submit" class="btn_default_mine" id="search_forum_submit" onclick="getDateValues()">Search</button>
+      							<input type="button" class="btn_default_mine" id="search_forum_close" value="Close">
+      						</form>
+      			</div>
+
+      </div>
+    </div>
+
+    <div id="footer">
+      <p>Copyright &copy; 2016 &ndash; 2017 WebForum. All rights reserved. </p>
+      <p> Design by <a href="https://github.com/StankovicMarko" title="SimplyGold">Marko Stankovic</a>.
+        <p> <a href="terms_services.html">Terms of Service</a> | <a href="about.html">About</a> </p>
+    </div>
+  </div>
+  <!-- </div> -->
+</body>
+
+</html>

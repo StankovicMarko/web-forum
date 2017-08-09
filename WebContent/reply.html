@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>WebForum</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="js/reply.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="screen.css" />
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+  <!--[if lt ie 7]><link rel="stylesheet" type="text/css" media="screen" href="ie-win.css" /><![endif]-->
+</head>
+
+<body id="">
+  <div class="">
+    <div class="main_div">
+      <div id="header">
+        <div class="pull-left big_search">
+          <button type="submit" class="btn_default_mine" id="big_search">
+            <span class="glyphicon glyphicon-search"></span> Search Forum</button>
+          <!-- <a href="./index.html" ><h1>LOGO</h1></a> -->
+        </div>
+
+        <div class="pull-right marg" id="logged_out" style="width:100px;">
+          <button class="btn_default_mine" id="btn_login">Log In</button>
+          <button class="btn_default_mine" id="btn_register">Register</button>
+        </div>
+
+        <div id="logged_in">
+          <h2 id="logged_user" class="pull-left"></h2>
+          <!-- <h4 id="logged_user_role" class="pull-left"></h4> -->
+          <div class="pull-right marg" style="width:100px;">
+
+            <button class="btn_default_mine" id="btn_logout">Logout</button>
+            <button class="btn_default_mine" id="btn_pannel">Pannel</button>
+
+          </div>
+        </div>
+
+      </div>
+      <div id="navigation">
+        <ul>
+          <!--  verovatno ce id biti neki genercki tipa navlink(id) pa kad klices salje redirect sa data
+          i onda to izvuce na toj stranici i puca get na servlet dobije json i stampa -->
+          <li id="home"><a href="./index.html">Home</a></li>
+          <li id="parent_topic"></li>
+        </ul>
+
+        <div id="notification_window" class="modal">
+          <div class="modal-content">
+            <p id="message"></p>
+          </div>
+
+        </div>
+      </div>
+      <div id="content-wrapper">
+        <div id="content">
+
+    <div class="show">
+      <div class="table-responsive">
+        <table id="topic_replies">
+          <thead>
+            <th colspan="2">reply</th>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+          <!--  REGISTER WINDOW-->
+          <div class="modal_windows register_window modal">
+            <p>Please fill info under to register!</p>
+            <form>
+              <div class="form-group form-group-sm">
+                <label for="reg_usn">Username:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="text" class="form-control" id="reg_usn">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="reg_psw">Password:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="password" class="form-control" id="reg_psw">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="reg_email">Email address:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="email" class="form-control" id="reg_email">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="reg_fname">First Name:</label>
+                <input type="text" class="form-control" id="reg_fname">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="reg_lname">Last Name:</label>
+                <input type="text" class="form-control" id="reg_lname">
+              </div>
+
+
+              <button type="submit" class="btn_default_mine" id="register_submit">Register</button>
+              <input type="button" class="btn_default_mine" id="register_close" value="Close">
+            </form>
+          </div>
+
+
+          <!--  LOGIN WINDOW-->
+          <div class="modal_windows modal login_window">
+
+            <p>Please fill info under to login!</p>
+            <form>
+              <div class="form-group form-group-sm">
+                <label for="username">Username:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="text" class="form-control" id="login_username">
+              </div>
+
+              <div class="form-group form-group-sm">
+                <label for="password">Password:</label>
+                <span class="glyphicon glyphicon-asterisk" style="float: right;font-size:10px;"></span>
+                <input type="password" class="form-control" id="login_password">
+              </div>
+
+
+              <button type="submit" class="btn_default_mine" id="login_submit">Login</button>
+              <input type="button" class="btn_default_mine" id="login_close" value="Close">
+
+
+            </form>
+          </div>
+
+
+  </div>
+  </div>
+
+  <div id="footer">
+    <p>Copyright &copy; 2016 &ndash; 2017 WebForum. All rights reserved. </p>
+    <p> Design by <a href="https://github.com/StankovicMarko" title="SimplyGold">Marko Stankovic</a>.
+      <p> <a href="terms_services.html">Terms of Service</a> | <a href="about.html">About</a> </p>
+  </div>
+  </div>
+  <!-- </div> -->
+</body>
+
+</html>
